@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cricket Buzz</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans', sans-serif;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f4f4f4 0%, #d9d9d9 100%);
+            color: #333;
+        }
+
+        header {
+            background-color: #021d36;
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo img {
+            height: 80px;
+            margin-left: 20px;
+            border-radius: 10px;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            transition: color 0.3s ease, background-color 0.3s ease;
+            padding: 10px 15px;
+            border-radius: 5px;
+        }
+
+        nav ul li a:hover {
+            color: #ffcc00;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .hero {
+            background-image: url('./landing.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero-content h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .hero-content p {
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #ffcc00;
+            color: #333;
+            padding: 10px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #e6b800;
+            transform: scale(1.05);
+        }
+
+        .about {
+            display: flex;
+            align-items: center;
+            padding: 80px 5%;
+            background-color: #021d36;
+            color: #fff;
+            flex-wrap: wrap;
+        }
+
+        .about-content {
+            flex: 1;
+            max-width: 600px;
+            padding-right: 50px;
+        }
+
+        .about h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .about p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .about-image {
+            flex: 1;
+            max-width: 50%;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .matches {
+            padding: 80px 5%;
+            text-align: center;
+            background-color: #021d36;
+            color: #fff;
+        }
+
+        .matches h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+        }
+
+        .match-item {
+            background-color: #021d36;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .match-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: scale(1.05);
+        }
+
+        .match-item h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .match-item p {
+            font-size: 16px;
+        }
+
+        .match-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+            background-color: #021d36;
+        }
+
+        .reservations, .testimonials {
+            flex: 1;
+            min-width: 300px;
+            margin: 20px;
+        }
+
+        .reservations {
+            background-color: #021d36;
+            padding: 40px;
+            border-radius: 10px;
+            text-align: center;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .reservations:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: scale(1.05);
+        }
+
+        .reservation-form h2 {
+            color: #fff;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .reservation-form input,
+        .reservation-form textarea {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            border: none;
+        }
+
+        .reservation-form button {
+            display: inline-block;
+            background-color: #ffcc00;
+            color: #333;
+            padding: 10px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .reservation-form button:hover {
+            background-color: #e6b800;
+            transform: scale(1.05);
+        }
+
+        .testimonials {
+            padding: 40px;
+            text-align: center;
+            background-color: #021d36;
+            border-radius: 10px;
+        }
+
+        .testimonials h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            color: #fff;
+        }
+
+        .testimonial {
+            max-width: 600px;
+            margin: 0 auto 40px;
+            text-align: left;
+            background-color: #021d36;
+            padding: 20px;
+            border-radius: 10px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .testimonial:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: scale(1.05);
+        }
+
+        .testimonial img {
+            display: block;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+        }
+
+        .testimonial p {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .testimonial h4 {
+            font-size: 20px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .gallery {
+            padding: 80px 5%;
+            text-align: center;
+            background-color: #021d36;
+        }
+
+        .gallery h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            color: #fff;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-gap: 20px;
+        }
+
+        .image-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .image-item img:hover {
+            transform: scale(1.05);
+        }
+
+        .contact {
+            background-color: #021d36;
+            padding: 80px 5%;
+            text-align: center;
+            color: #fff;
+        }
+
+        .contact-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .info-item {
+            margin: 0 20px;
+            text-align: center;
+        }
+
+        .info-item i {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            border: none;
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+        }
+
+        .contact-form button {
+            display: inline-block;
+            background-color: #ffcc00;
+            color: #333;
+            padding: 10px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .contact-form button:hover {
+            background-color: #e6b800;
+            transform: scale(1.05);
+        }
+
+        footer {
+            background-color: #021d36;
+            color: #fff;
+            padding: 20px 5%;
+            text-align: center;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        footer .social-icons {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        footer .social-icons a {
+            margin: 0 10px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 24px;
+            transition: color 0.3s ease;
+        }
+
+        footer .social-icons a:hover {
+            color: #ffcc00;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="logo.jpg" alt="Cricket Buzz Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#matches">Matches</a></li>
+                <li><a href="#bookings">Bookings</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Welcome to Cricket Buzz</h1>
+            <p>Your ultimate destination for all things cricket</p>
+            <a href="#" class="btn">Get Started</a>
+        </div>
+    </div>
+    <section class="about" id="about">
+        <div class="about-content">
+            <h2>About Us</h2>
+            <p>Cricket Buzz is your go-to source for the latest news, updates, and analysis in the world of cricket. Stay tuned for live match updates, in-depth articles, and expert opinions.</p>
+        </div>
+        <div class="about-image">
+            <img src="about.jpeg" alt="About Cricket">
+        </div>
+    </section>
+    <section class="matches" id="matches">
+        <h2>Upcoming Matches</h2>
+        <div style="display: flex;">
+        <div class="match-item">
+            <h3>Match 1</h3>
+            <img src="ind vs pak.jpg" alt="India vs Pakistan">
+            <p>India vs Pakistan</p>
+            <p>Date: June 09, 2024</p>
+            <p>Time: 8:00 AM</p>
+            <p>Venue: New York</p>
+        </div>
+        <div class="match-item">
+            <h3>Match 2</h3>
+            <img src="aus vs ind.webp" alt="Australia vs India">
+            <p>Australia vs India</p>
+            <p>Date: June 20, 2024</p>
+            <p>Time: 2:00 PM</p>
+            <p>Venue: Barbados</p>
+        </div>
+    </div>
+    </section>
+    <div class="container" id="bookings">
+        <section class="reservations">
+            <div class="reservation-form">
+                <h2>Book a Ticket</h2>
+                <form action="#">
+                    <input type="text" placeholder="Full Name" required>
+                    <input type="email" placeholder="Email" required>
+                    <input type="date" required>
+                    <textarea placeholder="Additional Notes" rows="5"></textarea>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </section>
+        <section class="testimonials">
+            <h2>Commentators</h2>
+            <div class="testimonial">
+                <img src="user1.jpg" alt="User 1">
+                <p>"Cricket Buzz is the best platform for all cricket enthusiasts. The live updates and detailed analyses are top-notch."</p>
+                <h4>J.v Prakash</h4>
+            </div>
+            <div class="testimonial">
+                <img src="user2.jpg" alt="User 2">
+                <p>"I love Cricket Buzz! The news articles are always up-to-date and the expert opinions are very insightful."</p>
+                <h4>Anirudh</h4>
+            </div>
+        </section>
+    </div>
+    <section class="gallery" id="gallery">
+        <h2>Gallery</h2>
+        <div class="image-grid">
+            <div class="image-item">
+                <img src="gallery1.webp" alt="Gallery Image 1">
+            </div>
+            <div class="image-item">
+                <img src="gallery2.webp" alt="Gallery Image 2">
+            </div>
+            <div class="image-item">
+                <img src="gallery3.jpg" alt="Gallery Image 3">
+            </div>
+            <div class="image-item">
+                <img src="gallery4.webp" alt="Gallery Image 4">
+            </div>
+        </div>
+    </section>
+    <section class="contact" id="contact">
+        <div class="contact-container">
+            <h2>Contact Us</h2>
+            <div class="contact-info">
+                <div class="info-item">
+                    <i class="fas fa-phone"></i>
+                    <p>+91 9848022338</p>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <p>Indiancricket@gmail.com</p>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <p>Visakhapatnam</p>
+                </div>
+            </div>
+            <form class="contact-form" action="#">
+                <input type="text" placeholder="Full Name" required>
+                <input type="email" placeholder="Email" required>
+                <textarea placeholder="Your Message" rows="5" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </section>
+    <footer>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+    </footer>
+</body>
+</html>
